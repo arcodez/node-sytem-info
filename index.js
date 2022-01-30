@@ -4,6 +4,7 @@ const app = express();
 
 const port = process.env.PORT || 3000;
 
+app.use(express.json());
 // create get endpoint to say hello world
 
 const getDataSytem = async () => {
@@ -34,8 +35,9 @@ const getDataSytem = async () => {
   console.log(dataFull[3]);
 };
 
-app.get("/", (req, res) => {
-  res.send("Get Data System Info Program!");
+app.get("/", async (req, res) => {
+  const dataGpu = await si.graphics();
+  res.json(dataGpu);
   getDataSytem();
 });
 
